@@ -1,6 +1,6 @@
 select /n  --> select chain N
 
-measure buriedarea /a with /b  --> Measures the SAburiedA between chain A and B 
+measure buriedarea /a with /b  --> Measures the buried area between chain A and B 
 
 sym #1 assembly 3 newmodel false copies false --> Show assembly “3” according to the information in the Log from the comand sym #1
 
@@ -32,3 +32,5 @@ transparency #1.1.1 60 --> change transparency of model 1.1 to 60%
 coulombic protein key true --> put the label of the colors of electrostatic potential
 
 ui favorites true [command to add to favorites]
+
+color bfactor palette alphafold --> color by bfactor with the alphafold usual palette of colors
