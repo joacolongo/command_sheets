@@ -1,0 +1,34 @@
+select /n  --> select chain N
+
+measure buriedarea /a with /b  --> Measures the SAburiedA between chain A and B 
+
+sym #1 assembly 3 newmodel false copies false --> Show assembly “3” according to the information in the Log from the comand sym #1
+
+measure sasa #1 & ~solvent --> the total SASA excluding waters
+
+style :STI sphere --> chain the ligand STI to spheres
+ 
+hide ~sel --> hide everything that is not sel
+
+hbonds :sti reveal true log true --> make hbond between everything and sti
+cartoon suppress false --> show the atoms to whith the hbonds are united
+
+label @@display --> label the residues with displayed atoms
+
+name resist :250,253,256,301,315,317,320,351,373,381 --> name the selection of those residue numbers as resist
+color resist & C gold target al --> color resist selection Carbons that target the sti as gold
+
+seq  chain /A --> display the sequence of chain A
+
+
+open 1fpp
+surface zone #1 near :fpp dist 8 max 1 --> limiting the surface to a zone around FPP and hiding ribbons and atoms other than FPP:
+hide ~:fpp target ar
+
+
+transparency #1.1.1 60 --> change transparency of model 1.1 to 60%
+
+
+coulombic protein key true --> put the label of the colors of electrostatic potential
+
+ui favorites true [command to add to favorites]
