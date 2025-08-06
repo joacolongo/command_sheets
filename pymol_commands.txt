@@ -1,0 +1,82 @@
+SELECTIONS
+
+select chainN, chain N                         --> Select chain N
+select res50to100, resi 50-100                 --> Select residues 50 to 100
+select ligand, resn STI                        --> Select ligand named STI
+select resist, resi 250+253+256+301+315+317+320+351+373+381  --> Name selection "resist"
+
+STYLE
+
+show cartoon                                   --> Show cartoon (default for proteins)
+show sticks, resist                            --> Show stick representation for resist selection
+hide everything, not resist                    --> Hide everything except resist
+hide lines                                     --> Hide line representation
+show spheres, resn STI                         --> Show STI ligand as spheres
+as surface, chain A                            --> Show chain A as surface
+set cartoon_side_chain_helper, on              --> Show side chains in cartoon
+
+bg_color white                                --> Set background to white
+set ray_trace_mode, 1                         --> Enable high-quality rendering
+set cartoon_transparency, 0.5, chain B        --> Make chain B partially transparent
+set label_size, 14                            --> Increase label font size
+
+
+LABELING
+
+label name CA, resn + resi                     --> Label residues with 3-letter code and number
+label ligand, name                             --> Label ligand atoms with atom name
+label sele, "%s%s" % (resn, resi)              --> Custom label format for selection
+
+MEASUREMENTS
+
+distance hb, (resi 45), (resi 78)              --> Measure distance between residues 45 and 78
+angle ang, (name CA and resi 45), (name CA and resi 46), (name CA and resi 47)  --> Measure angle
+dihedral dih, (name N and resi 1), (name CA and resi 1), (name C and resi 1), (name N and resi 2) --> Measure dihedral angle
+get_area sele, load_b=1                        --> Compute SASA and store in B-factor
+
+TRANSFORMATIONS
+
+distance hb, (resi 45), (resi 78)              --> Measure distance between residues 45 and 78
+angle ang, (name CA and resi 45), (name CA and resi 46), (name CA and resi 47)  --> Measure angle
+dihedral dih, (name N and resi 1), (name CA and resi 1), (name C and resi 1), (name N and resi 2) --> Measure dihedral angle
+get_area sele, load_b=1                        --> Compute SASA and store in B-factor
+
+
+CONTACTS
+
+h_add sele                                     --> Add hydrogens to selection
+find_pairs sele1, sele2                        --> Find interaction pairs between two selections
+dist hbonds, resn STI, not resn STI, mode=2    --> Hydrogen bonds between ligand STI and the rest
+
+
+GROUPING
+
+create resist, resi 250+253+256+301+315+317+320+351+373+381   --> Create object from residues
+group Complex, protein ligand water                          --> Group multiple objects
+
+
+SAVING 
+
+save my_structure.pse                         --> Save PyMOL session
+save resist.pdb, resist                       --> Save selection to PDB
+load myfile.pdb                               --> Load a structure file
+
+RENDERING
+
+ray                                           --> Render high-quality image
+png image.png, dpi=300                        --> Save rendered image as PNG
+
+SCRIPTING
+
+run script.py                     --> Run a Python script file inside PyMol
+run script.pml
+
+pymol -cq script.pml              --> Run a Pymol script from terminal in quiet mode (no GUI)
+
+PYTHON 
+
+from pymol import cmd
+
+cmd.fetch("1ubq")
+cmd.hide("everything")
+
