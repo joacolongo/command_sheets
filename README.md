@@ -1,3 +1,3 @@
 # command_sheets
 
-Mi coleccion de comandos 
+Mi coleccion de comandos - Joaquin Algorta
